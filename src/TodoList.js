@@ -1,5 +1,5 @@
 import React from 'react';
-
+import TodoItem from './TodoItem';
 class TodoList extends React.Component {
 	constructor(props) {
 		super(props);
@@ -19,7 +19,8 @@ class TodoList extends React.Component {
 			inputValue: e.target.value
 		});
 	}
-	handleItemClick(index) {
+	handleDelete(index) {
+		console.log('handleDelete', index);
 		let list = [...this.state.list];
 		list.splice(index, 1);
 		this.setState({
@@ -39,12 +40,12 @@ class TodoList extends React.Component {
 				<ul>
 					{this.state.list.map((item, index) => {
 						return (
-							<li
+							<TodoItem
 								key={index}
-								onClick={this.handleItemClick.bind(this, index)}
-							>
-								{item}
-							</li>
+								content={item}
+								index={index}
+								delete={this.handleDelete.bind(this)}
+							/>
 						);
 					})}
 				</ul>
